@@ -27,8 +27,7 @@ def load_events():
 def get_events(
     page: int = Query(default=1, ge=1, description="Número da página"),
     limit: int = Query(default=20, ge=1, le=20, description="Máximo de 20 itens por página")):
-    with open(DATA_FILE, "r", encoding="utf-8") as file:
-        dados = json.load(file)
+    dados = load_events()
     
     todos_eventos = dados.get("events", [])
     
