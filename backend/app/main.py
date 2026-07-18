@@ -42,9 +42,7 @@ def get_events(
 # por ID
 @app.get("/events/{id}",tags=["Events"])
 def filtro_id(id: int):
-    with open(DATA_FILE, "r", encoding="utf-8") as file:
-        dados = json.load(file)
-    
+    dados = load_events()
     # Buscando o evento pedido do 'ID'
     for evento in dados.get("events", []):
         if evento.get("id") == id:
@@ -56,8 +54,7 @@ def filtro_id(id: int):
 # por cidade
 @app.get("/events/city/{city}",tags=["Events"])
 def filtro_city(city: str):
-    with open(DATA_FILE, "r", encoding="utf-8") as file:
-        dados = json.load(file)
+    dados = load_events()
 
     eventos_encontrados = []
     
@@ -74,8 +71,7 @@ def filtro_city(city: str):
 # por estado
 @app.get("/events/state/{state}",tags=["Events"])
 def filtro_state(state: str):
-    with open(DATA_FILE, "r", encoding="utf-8") as file:
-        dados = json.load(file)
+    dados = load_events()
     
     eventos_encontrados = []
     
@@ -93,8 +89,7 @@ def filtro_state(state: str):
 # por modalidade
 @app.get("/events/modality/{modality}", tags=["Events"])
 def filtro_modality(modality: str):
-    with open(DATA_FILE, "r", encoding="utf-8") as file:
-        dados = json.load(file)
+    dados = load_events()
     
     eventos_encontrados = []
     
@@ -112,8 +107,7 @@ def filtro_modality(modality: str):
 # por serviço
 @app.get("/events/source/{source}", tags=["Events"])
 def filtro_source(source: str):
-    with open(DATA_FILE, "r", encoding="utf-8") as file:
-        dados = json.load(file)
+    dados = load_events()
     
     eventos_encontrados = []
     
@@ -131,8 +125,7 @@ def filtro_source(source: str):
 # por url
 @app.get("/events/url/{url}")
 def filtro_url(url: str):
-    with open(DATA_FILE, "r", encoding="utf-8") as file:
-        dados = json.load(file)
+    dados = load_events()
     
     eventos_encontrados = []
     
@@ -150,8 +143,7 @@ def filtro_url(url: str):
 # por start_date
 @app.get("/events/start_date/{start_date}")
 def filtro_start_date(start_date: str):
-    with open(DATA_FILE, "r", encoding="utf-8") as file:
-        dados = json.load(file)
+    dados = load_events()
     
     eventos_encontrados = []
     
