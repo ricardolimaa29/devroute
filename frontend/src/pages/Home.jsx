@@ -4,12 +4,14 @@ import Navbar from "../components/Navbar/Navbar";
 import Hero from "../components/Hero/Hero";
 import SearchBar from "../components/SearchBar/SearchBar";
 import EventCard from "../components/EventCard/EventCard";
+import SearchSection from "../components/SearchSection/SearchSection";
 
 import api from "../services/api";
 
 function Home() {
 
     const [events, setEvents] = useState([]);
+    const [search, setSearch] = useState("");
 
     useEffect(() => {
 
@@ -40,7 +42,18 @@ function Home() {
         }
 
     }
-    console.log(events);
+    const filteredEvents = events.filter((event)=>{
+
+    const text = (
+        event.title +
+        event.city +
+        event.state +
+        event.category
+    ).toLowerCase();
+
+    return text.includes(search.toLowerCase());
+
+    });
     return (
 
         <>
@@ -49,13 +62,22 @@ function Home() {
 
             <Hero />
 
-            <SearchBar />
+            <SearchSection
+
+            total={filteredEvents.length}
+
+            search={search}
+
+            setSearch={setSearch}
+
+            />
+
 
             <section className="cards">
 
                 {
 
-                    events.map((event) => (
+                    filteredEvents.map((event) => (
                             <EventCard
 
                                 key={event.id}
